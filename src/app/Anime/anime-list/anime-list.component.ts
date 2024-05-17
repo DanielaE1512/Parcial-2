@@ -19,15 +19,20 @@ export class AnimeListComponent implements OnInit {
     this.selectedAnime = anime;
   }
 
+  getAnimes(): void {
+    this.animeService.getAnimes().subscribe((animes) => {
+      this.animes = animes;
+    });
+  }
+
   totalEpisodios: number = 0;
   ratingPromedio: number = 0
 
-  calcularEpisodiosRating () : number
+  calcularRating () : number
   {
       let sumaRating = 0;
       this.animes.forEach((anime) => {
-        this.totalEpisodios+= anime.episode;
-        sumaRating += parseFloat(anime.rating)
+        sumaRating += parseFloat(anime.Rating)
 
       });
 
@@ -35,21 +40,30 @@ export class AnimeListComponent implements OnInit {
 
   }
 
+  calcularEpisodios () : number
+  {
+      
+      this.animes.forEach((anime) => {
+        this.totalEpisodios+= anime.episode;
+    
+      });
+
+      return this.totalEpisodios;
+
+  }
+
  
 
   constructor(private animeService: AnimeService) { }
 
-  getAnimes(): void {
-    this.animeService.getAnimes().subscribe((animes) => {
-      this.animes = animes;
-    });
-  }
+  
  
   
 
   ngOnInit() {
     this.getAnimes();
-    this.ratingPromedio = this.calcularEpisodiosRating();
+    this.ratingPromedio = this.calcularEpisodios();
+    this.totalEpisodios = this.calcularEpisodios();
   }
 
 }

@@ -2,7 +2,7 @@
   <app-anime-detail [anime]="selectedAnime"></app-anime-detail>
 </div>
 
-<p>  La cantidad total de espisodios es {{totalEpisodios}} y el rating promedio es {{ratingPromedio}} </p>
+<p>  La cantidad total de espisodios es {{calcularEpisodios()}} y el rating promedio es {{calcularRating()}} </p>
 <div class="container-fluid">
   <div class="row">
     <div class="col mb-3" *ngFor="let anime of animes">
